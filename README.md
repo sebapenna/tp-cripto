@@ -5,3 +5,11 @@
 - Bellaera, Leonardo
 - Penna, Sebastian
 - Torraca, Facundo
+
+---
+
+## Run
+
+- npm i
+- npm start
+- goto localhost:8080
