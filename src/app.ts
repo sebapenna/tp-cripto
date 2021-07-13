@@ -1,3 +1,5 @@
+require('dotenv').config({ path: __dirname+'/prod.env' });
+
 import express, { Express, Request, Response } from "express";
 import { json } from "body-parser";
 import { mainRouter } from "./routes";
