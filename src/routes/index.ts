@@ -1,7 +1,9 @@
-import { Router } from "express";
+import express, { Router } from "express";
+import { userRouter } from "./user";
 
 export const mainRouter = Router()
 
-// todo: agregar routers
-// mainRouter.use("/", router);
+// todo: cambiar los endpoints
+mainRouter.use("/home", express.static("./public/index.html"));
+mainRouter.use("/user", userRouter);
 

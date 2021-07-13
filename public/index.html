@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Home Page </title>
+    <style>
+        Body {
+            font-family: Tahoma, Helvetica, sans-serif;
+            background-color: #003f75;
+            text-align: center;
+        }
+        button {
+            background-color: #003f75;
+            width: 100%;
+            color: white;
+            padding: 15px;
+            margin: 10px 0px;
+            border: none;
+            cursor: pointer;
+            font-size: 50px;
+        }
+        form {
+            border: 3px solid #f1f1f1;
+            width: 40%;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<h1 style="color:white;"> Grupo 9 - OAuth </h1>
+<form>
+    <button formaction="https://github.com/login/oauth/authorize">
+        Login with GitHub!
+    </button>
+    <input type="hidden" name="client_id" value="bf658e2058ab7782a5f7" />
+<!--    <input type="hidden" name="redirect_uri" value="http://localhost:8080/oauth/redirect" />-->
+</form>
+</body>
+</html>
