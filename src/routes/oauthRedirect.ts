@@ -29,7 +29,7 @@ oauthRedirectRouter.get("/", (req: OAuthRedirectRequest, res) => {
     /* Get the access token from the response body */
     const accessToken = response.data.access_token
     /* Redirect user to info page */
-    res.redirect(`/welcome.html?access_token=${accessToken}`)
+    res.redirect(`/user-info?access_token=${accessToken}`)
   })
 
 })
