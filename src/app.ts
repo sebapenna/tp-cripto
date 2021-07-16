@@ -1,4 +1,4 @@
-require('dotenv').config({ path: __dirname+'/dev.env' });
+require('dotenv').config({ path: __dirname+'/.env' });
 
 import express, { Express, Request, Response } from "express";
 import { json } from "body-parser";
