@@ -6,38 +6,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hello</title>
+
+    <!--scripts-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!--styles-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>    
 </head>
 
 <body>
-<p id="userName" onclick="getGithubName()">Click me to change my HTML content (innerHTML).</p>
-</body>
-<script>
+    <div class="container-fluid ft-container" style="padding-top: 5%">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 id="ft-username"></h1>
+                </div>
+            </div>
     
-    /* Get the access token received from the query of the request */
-    const query = window.location.search.substring(1)
-    const accessToken = query.split('access_token=')[1]
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-6 form-group">
+                            <label for="ft-name">Github Username  <i class="fa fa-user"></i></label>
+                            <input type="text" class="form-control" id="ft-name" readonly/>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="ft-email">Email  <i class="fa fa-envelope"></i></label>
+                            <input type="text" class="form-control" id="ft-email" readonly/>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-lg-6 form-group">
+                            <label for="ft-fecha">Creaci&oacute;n <i class="fa fa-egg"></i></label>
+                            <input type="text" class="form-control" id="ft-fecha" readonly/>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="ft-ubicacion">Ubicaci&oacute;n <i class="fa fa-map-marker-alt"></i></label>
+                            <input type="text" class="form-control" id="ft-ubicacion" readonly/>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <label for="ft-bio">Bio <i class="fa fa-book"></i></label>
+                            <input type="text" class="form-control" id="ft-bio" readonly/>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-lg-3">
+                    <img id="ft-profile" src="https://www.worldfuturecouncil.org/wp-content/uploads/2020/06/blank-profile-picture-973460_1280-1.png" class="rounded" width="250px" height="250px">
+                </div> 
+            </div>
 
-    /* Object to save the response from github request */
-    let githubResponse;
 
-    /* Fetch the user info form github API */
-    /*
-    * Fetch the user info form github API
-    * All fields available from the user can be found in: https://developer.github.com/v3/users/#get-the-authenticated-user
-    * */
-    fetch('https://api.github.com/user', {
-        headers: {
-            Accept: "application/vnd.github.v3+json",
-            Authorization: 'token ' + accessToken // Set access token received by the Authorization Server
+            <div class="row" style="padding-top: 30%; padding-left: 40%;">
+                <div class="col-lg-12">    
+                    <h3><a target="_blank" href="" id="ft-github-link">Go to repository</a> <i class="fab fa-github"></i></h3>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</body>
+
+<footer>
+    <script>
+        /* Get the access token received from the query of the request */
+        const query = window.location.search.substring(1)
+        const accessToken = query.split('access_token=')[1]
+
+        /* Fetch the user info form github API */
+        /*
+        * Fetch the user info form github API
+        * All fields available from the user can be found in: 
+        * https://developer.github.com/v3/users/#get-the-authenticated-user
+        * */
+
+        const setData = (githubData) => {
+            $('#ft-github-link').attr("href", githubData.html_url);
+            $('#ft-ubicacion').val(githubData.location);
+            $('#ft-username').text(githubData.login);
+            $('#ft-name').val(githubData.name);
+            $('#ft-email').val(githubData.email ?? "Not available");
+            $('#ft-fecha').val(githubData.created_at);
+            $('#ft-bio').val(githubData.bio);
+            $('#ft-profile').attr("src", githubData.avatar_url);
         }
-    })
-        .then(res => res.json())
-        .then( res => githubResponse = res)
 
-    function getGithubName() {
-        document.getElementById("userName").innerHTML = githubResponse.name;
-    }
+        $('document').ready(() => {
+            fetch('https://api.github.com/user', {
+            headers: {
+                Accept: "application/vnd.github.v3+json",
+                // Set access token received by the Authorization Server
+                Authorization: 'token ' + accessToken 
+            }
+            }).then(res => res.json())
+            .then( res => setData(res));
+        });
+    </script>
 
-</script>
+    <style>
+        .ft-container {
+            background-image: url("https://i.redd.it/g38817mqb1361.png");
+            background-position: top;
+            height: 100vh;
+        }
+    </style>
+
+</footer>
 
 </html>
