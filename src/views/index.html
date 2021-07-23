@@ -24,8 +24,8 @@
                             <h3>Login with GitHub! <i class="fab fa-github"></i></h3>
                         </buttoN>
 
-                        <input type="hidden" name="client_id" value="bf658e2058ab7782a5f7" />
-                        <input type="hidden" name="redirect_uri" value="http://localhost:8083/oauth/redirect" />
+                        <input id="ft-client-id" type="hidden" name="client_id" value="" />
+                        <input id="ft-redirect-uri" type="hidden" name="redirect_uri" value="" />
                     </div>
                 </div>
             </div>
@@ -42,6 +42,22 @@
             height: 100vh;
         }
     </style>
+
+    <script type="text/javascript">
+    
+    function getRedirectUri(port) {
+        return `http://localhost:${port}/oauth/redirect`
+    }
+
+    $(document).ready(() => {
+        const clientId = "<%= clientId %>";
+        const port = "<%= port %>";
+
+        $('#ft-client-id').val(clientId);
+        $('#ft-redirect-uri').val(getRedirectUri(port));
+    });
+
+    </script>
 </footer>
 </html>
 

@@ -7,6 +7,9 @@ import { createLogDataFromRequest } from "./models/requestLogData";
 
 const app = express();
 
+app.engine('html', require('ejs').renderFile);
+app.set('views', __dirname + '/views'); 
+
 type ExpressApp = (
   req: Request,
   res: Response,
